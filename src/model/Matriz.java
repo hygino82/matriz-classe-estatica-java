@@ -124,4 +124,58 @@ public class Matriz {
 		return identidade;
 	}
 
+	public static double[][] matrizReduzida(double[][] t, int lx, int cx) {
+		int linha = t.length - 1;//dimensões da matriz reduzida
+		int coluna = t[0].length - 1;
+		double[][] mr = new double[linha][coluna];
+
+		int i, j;
+
+		for (i = 0; i < linha + 1; i++) {
+			for (j = 0; j < coluna + 1; j++) {
+
+				if ((i != lx) && (j != cx)) {
+					if (lx == 0) {
+						if (cx == 0)
+							mr[i - 1][j - 1] = t[i][j];
+						else if (cx == coluna)
+							mr[i - 1][j] = t[i][j];
+						else if (j < cx)
+							mr[i - 1][j] = t[i][j];
+						else
+							mr[i - 1][j - 1] = t[i][j];
+					} else if (lx == linha) {
+						if (cx == 0)
+							mr[i][j - 1] = t[i][j];
+						else if (cx == coluna)
+							mr[i][j] = t[i][j];
+						else if (j < cx)
+							mr[i][j] = t[i][j];
+						else
+							mr[i][j - 1] = t[i][j];
+					} else {
+						if (i < lx)
+							if (cx == 0)
+								mr[i][j - 1] = t[i][j];
+							else if (cx == coluna)
+								mr[i][j] = t[i][j];
+							else if (j < cx)
+								mr[i][j] = t[i][j];
+							else
+								mr[i][j - 1] = t[i][j];
+						else if (cx == 0)
+							mr[i - 1][j - 1] = t[i][j];
+						else if (cx == coluna)
+							mr[i - 1][j] = t[i][j];
+						else if (j < cx)
+							mr[i - 1][j] = t[i][j];
+						else
+							mr[i - 1][j - 1] = t[i][j];
+					}
+				}
+			}
+		}
+		return mr;
+	}
+
 }
