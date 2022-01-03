@@ -17,6 +17,19 @@ public class Program {
 		double[][] cofatores = Matriz.matrizCofatores(a);
 		System.out.println("Cofatores da Matriz A");
 		Matriz.escrevaMatriz(cofatores);
+		linha();
+
+		double[][] adjunta = Matriz.matrizAdjunta(a);
+		System.out.println("Adjunta da Matriz A");
+		Matriz.escrevaMatriz(adjunta);
+		linha();
+
+		double[][] verificaIdentidade = Matriz.produtoMatrizes(a, adjunta);
+		double det = Matriz.determinante(Matriz.escalona(a));
+		System.out.printf("DET(A) = %.5f\n", det);
+		System.out.println(
+				"Verificando se o produto da matriz A pela sua Adjunta resulta no determinante de A * identidade ");
+		Matriz.escrevaMatriz(verificaIdentidade);
 	}
 
 	public static void linha() {

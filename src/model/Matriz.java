@@ -200,8 +200,8 @@ public class Matriz {
 
 					double mr[][] = matrizReduzida(copia, u, v);
 					double cof = determinante(escalona(mr));
-					//System.out.printf("u + v = %d\n", (u + v));
-					//System.out.printf("COF[%d,%d] = %.5f\n", (u + 1), (v + 1), cof);
+					// System.out.printf("u + v = %d\n", (u + v));
+					// System.out.printf("COF[%d,%d] = %.5f\n", (u + 1), (v + 1), cof);
 					if ((u + v) % 2 == 0) {
 						cofatores[u][v] = cof;
 					} else {
@@ -211,6 +211,11 @@ public class Matriz {
 			}
 		}
 		return cofatores;
+	}
+
+	public static double[][] matrizAdjunta(double[][] matriz) {
+		double[][] adjunta = matrizTransposta(matrizCofatores(matriz));
+		return adjunta;
 	}
 
 }
