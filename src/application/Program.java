@@ -9,14 +9,14 @@ public class Program {
 	public static void main(String[] args) {
 		Locale.setDefault(Locale.US);
 
-		double[][] a = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 2 }, { 9, 0, 4 } };
+		double[][] a = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 2 } };
 		System.out.println("Matriz A");
 		Matriz.escrevaMatriz(a);
 		linha();
 
-		double[][] transposta = Matriz.matrizTransposta(a);
-		System.out.println("Transposta da Matriz A");
-		Matriz.escrevaMatriz(transposta);
+		double[][] cofatores = Matriz.matrizCofatores(a);
+		System.out.println("Cofatores da Matriz A");
+		Matriz.escrevaMatriz(cofatores);
 	}
 
 	public static void linha() {

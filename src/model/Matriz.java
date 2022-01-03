@@ -188,4 +188,29 @@ public class Matriz {
 		return transposta;
 	}
 
+	public static double[][] matrizCofatores(double[][] matriz) {
+		double[][] cofatores = new double[matriz.length][matriz.length];
+
+		if (matriz.length != matriz[0].length) {
+			throw new IllegalArgumentException("A matriz não é quadrada");
+		} else {
+			for (int u = 0; u < matriz.length; u++) {
+				for (int v = 0; v < matriz.length; v++) {
+					double[][] copia = matrizBackup(matriz);
+
+					double mr[][] = matrizReduzida(copia, u, v);
+					double cof = determinante(escalona(mr));
+					//System.out.printf("u + v = %d\n", (u + v));
+					//System.out.printf("COF[%d,%d] = %.5f\n", (u + 1), (v + 1), cof);
+					if ((u + v) % 2 == 0) {
+						cofatores[u][v] = cof;
+					} else {
+						cofatores[u][v] = -cof;
+					}
+				}
+			}
+		}
+		return cofatores;
+	}
+
 }
