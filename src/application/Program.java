@@ -12,24 +12,17 @@ public class Program {
 		double[][] a = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 2 } };
 		System.out.println("Matriz A");
 		Matriz.escrevaMatriz(a);
+		System.out.println("DET(A) = " + Matriz.determinante(a));
 		linha();
 
-		double[][] cofatores = Matriz.matrizCofatores(a);
-		System.out.println("Cofatores da Matriz A");
-		Matriz.escrevaMatriz(cofatores);
+		System.out.println("Dobro da Matriz A");
+		double[][] escalar  = Matriz.multiplicaEscalar(a, 2.0);
+		Matriz.escrevaMatriz(escalar);
 		linha();
-
-		double[][] adjunta = Matriz.matrizAdjunta(a);
-		System.out.println("Adjunta da Matriz A");
-		Matriz.escrevaMatriz(adjunta);
-		linha();
-
-		double[][] verificaIdentidade = Matriz.produtoMatrizes(a, adjunta);
-		double det = Matriz.determinante(Matriz.escalona(a));
-		System.out.printf("DET(A) = %.5f\n", det);
-		System.out.println(
-				"Verificando se o produto da matriz A pela sua Adjunta resulta no determinante de A * identidade ");
-		Matriz.escrevaMatriz(verificaIdentidade);
+		
+		System.out.println("Inversa da Matriz A");
+		double[][] inversa = Matriz.matrizInversa(a);
+		Matriz.escrevaMatriz(inversa);
 	}
 
 	public static void linha() {

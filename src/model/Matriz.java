@@ -57,12 +57,24 @@ public class Matriz {
 		return matriz;
 	}
 
+	public static double[] matrizBackup(double[] m) {
+		
+		double[] matriz = new double[m.length];
+		for (int y = 0; y < m.length; y++) {
+			matriz[y] = m[y];
+		}
+		return matriz;
+	}
+
 	public static double determinante(double[][] t) {
 
-		int n = t.length;
+		double m[][] = escalona(t);
+		// escalonar a matriz antes de achar o determinante pela diagonal principal;
+
+		int n = m.length;
 		double det = 1; // elemento neutro em um produto
 		for (int z = 0; z < n; z++) {
-			det = det * t[z][z];
+			det = det * m[z][z];
 		}
 		return det;
 	}
@@ -125,6 +137,7 @@ public class Matriz {
 	}
 
 	public static double[][] matrizReduzida(double[][] t, int lx, int cx) {
+		
 		int linha = t.length - 1;// dimensões da matriz reduzida
 		int coluna = t[0].length - 1;
 		double[][] mr = new double[linha][coluna];
@@ -179,6 +192,7 @@ public class Matriz {
 	}
 
 	public static double[][] matrizTransposta(double[][] m) {
+		
 		double[][] transposta = new double[m[0].length][m.length];
 		for (int i = 0; i < m.length; i++) {
 			for (int j = 0; j < m[0].length; j++) {
@@ -189,6 +203,7 @@ public class Matriz {
 	}
 
 	public static double[][] matrizCofatores(double[][] matriz) {
+		
 		double[][] cofatores = new double[matriz.length][matriz.length];
 
 		if (matriz.length != matriz[0].length) {
@@ -214,8 +229,52 @@ public class Matriz {
 	}
 
 	public static double[][] matrizAdjunta(double[][] matriz) {
+		
 		double[][] adjunta = matrizTransposta(matrizCofatores(matriz));
 		return adjunta;
 	}
 
+	public static double[][] multiplicaEscalar(double[][] matriz, double constante) {
+		
+		int linha = matriz.length;
+		int coluna = matriz[0].length;
+		double[][] escalar = matrizBackup(matriz);// copia pra não modificar a matriz
+
+		for (int u = 0; u < linha; u++) {
+			for (int v = 0; v < coluna; v++) {
+				escalar[u][v] *= constante;
+			}
+		}
+
+		return escalar;
+	}
+
+	public static double[] multiplicaEscalar(double[] matriz, double constante) {
+		
+		double[] escalar = matrizBackup(matriz);
+		int coluna = matriz.length;
+		for (int v = 0; v < coluna; v++) {
+			escalar[v] *= constante;
+		}
+		return escalar;
+	}
+
+	public static double[][] matrizInversa(double[][] matriz) {
+
+		double[][] adjunta = matrizAdjunta(matriz);
+		double[][] inversa;
+
+		if (matriz.length != matriz[0].length) {
+			throw new IllegalArgumentException("A matriz não é quadrada");
+		} else {
+			double det = determinante(matriz);
+			if (det == 0.0) {
+				throw new IllegalArgumentException("A matriz não possui inversa pois o seu determinante é nulo.");
+			} else {
+				inversa = multiplicaEscalar(adjunta, 1.0 / det);
+			}
+
+		}
+		return inversa;
+	}
 }
