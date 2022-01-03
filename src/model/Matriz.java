@@ -125,7 +125,7 @@ public class Matriz {
 	}
 
 	public static double[][] matrizReduzida(double[][] t, int lx, int cx) {
-		int linha = t.length - 1;//dimensões da matriz reduzida
+		int linha = t.length - 1;// dimensões da matriz reduzida
 		int coluna = t[0].length - 1;
 		double[][] mr = new double[linha][coluna];
 
@@ -176,6 +176,16 @@ public class Matriz {
 			}
 		}
 		return mr;
+	}
+
+	public static double[][] matrizTransposta(double[][] m) {
+		double[][] transposta = new double[m[0].length][m.length];
+		for (int i = 0; i < m.length; i++) {
+			for (int j = 0; j < m[0].length; j++) {
+				transposta[j][i] = m[i][j];
+			}
+		}
+		return transposta;
 	}
 
 }
